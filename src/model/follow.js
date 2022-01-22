@@ -31,6 +31,6 @@ FollowSchema.pre('updateOne', function (next) {
 	next();
 });
 
-const Follow = mongoose.model('post', FollowSchema);
+const Follow = mongoose.model('follow', FollowSchema);
 
 exports.Follow = Follow;

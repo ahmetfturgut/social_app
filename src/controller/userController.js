@@ -31,8 +31,7 @@ exports.updateUser = async (req, res, next) => {
 
 exports.followUser = async (req, res, next) => {
 	try {
-		const { followingId } = req.body;
-		const followerId = req.userData._id.toString();
+		const { followingId,followerId } = req.body; 
 		const result = await userService.followUser({ followingId,followerId });
 
 		res.apiResponse = {
@@ -54,3 +53,56 @@ exports.followUser = async (req, res, next) => {
 
 	next();
 };
+
+exports.unFollowUser = async (req, res, next) => {
+	try {
+		 
+		const result = await userService.unFollowUser();
+
+		res.apiResponse = {
+			status: Status.OK,
+			success: result.success,
+			error: result.error,
+			data: result.data,
+			message: 'Succesfull'
+		};
+	} catch (error) {
+		res.apiResponse = {
+			status: Status.BAD_REQUEST,
+			success: false,
+			error: error.message,
+			data: null,
+			message: 'Error'
+		};
+	}
+
+	next();
+};
+
+
+exports.getFollowAndFollowerUser = async (req, res, next) => {
+	try {
+		const { userId } = req.body; 
+		const result = await userService.getFollowAndFollowerUser(userId);
+
+		res.apiResponse = {
+			status: Status.OK,
+			success: result.success,
+			error: result.error,
+			data: result.data,
+			message: 'Succesfull'
+		};
+	} catch (error) {
+		res.apiResponse = {
+			status: Status.BAD_REQUEST,
+			success: false,
+			error: error.message,
+			data: null,
+			message: 'Error'
+		};
+	}
+
+	next();
+};
+
+

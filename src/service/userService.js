@@ -104,6 +104,23 @@ exports.registerUser = async user => {
 	} catch (error) {
 		throw { success: false, error: any };
 	}
-};
+  };
  
 
+
+/**
+ * @description Gets user follow follower by id
+ * @param id {property} User Id
+ * @returns {Promise<{success: boolean, error: *} | {success: boolean, data: follow}>}
+ * {success: false, error: any} or {success: true, data: {follow}}
+ */
+ exports.getFollowAndFollowerUser = async id => {
+	try {
+		const followers = await followRepository.getFollowAndFollowerUser(id);
+
+
+		return { success: true, data: followers };
+	} catch (error) {
+		throw { success: false, error: any };
+	}
+}; 

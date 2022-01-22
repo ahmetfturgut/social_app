@@ -28,8 +28,38 @@ const { Follow } = require('../model/follow');
 	} catch (error) {
 		throw error;
 	}
+ };
+
+
+
+/**
+ * @description get Follow And Follower User
+ * @param id {property} User Id
+ * getFollowAndFollowerUser
+ */
+exports.getFollowAndFollowerUser = async id => {
+	return new Promise((resolve, reject) => {
+		Follow.find({
+			"$or": [{
+				"followerId": id
+			}, {
+				"followingId": id
+			}]
+		})
+			.then(result => {
+
+				resolve(result);
+			})
+			.catch(err => {
+				reject(err);
+			})
+	})
 };
 
+
+
+
+ 
 
 
 

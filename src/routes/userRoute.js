@@ -11,7 +11,7 @@ exports.assignRoutes = app => {
 	app.put(
 		requestUtil.getUrlPrefix('user/:id'),
 		validate(userValidation.updateUser),
-		authorizer.checkAuth,
+		// authorizer.checkAuth,
 		userController.updateUser,
 		apiResponse.send
 	);
@@ -20,23 +20,33 @@ exports.assignRoutes = app => {
 	 * Follow User
 	 */
 	app.post(
-		requestUtil.getUrlPrefix('followUser'),
+		requestUtil.getUrlPrefix('user/followUser'),
 		validate(userValidation.followUser),
-		authorizer.checkAuth,
+		// authorizer.checkAuth,
 		userController.followUser,
 		apiResponse.send
 	);
 
 	/**
-    * Un Follow User
-    */
-	// app.post(
-	// 	requestUtil.getUrlPrefix('unFollowUser'),
-	// 	validate(userValidation.unFollowUser),
-	// 	authorizer.checkAuth,
-	// 	userController.unFollowUser,
-	// 	apiResponse.send
-	// );
+	* Un Follow User
+	*/
+	app.delete(
+		requestUtil.getUrlPrefix('user/unFollowUser/:id'),
+		validate(userValidation.unFollowUser),
+		// authorizer.checkAuth,
+		userController.unFollowUser,
+		apiResponse.send
+	);
 
+	/**
+	 * Get follow follower User
+	 */
+	app.post(
+		requestUtil.getUrlPrefix('user/getFollowAndFollowerUser'),
+		// validate(userValidation.getFollowAndFollowerUser),
+		// authorizer.checkAuth,
+		userController.getFollowAndFollowerUser,
+		apiResponse.send
+	);
 
 };

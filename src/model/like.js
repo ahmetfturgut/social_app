@@ -13,7 +13,6 @@ const LikeSchema = new Schema({
 		type: String,
 		required: true
 	},
-	 
 	createdDateTime: {
 		type: Date,
 		default: Date.now
@@ -32,6 +31,6 @@ LikeSchema.pre('updateOne', function (next) {
 	next();
 });
 
-const Like = mongoose.model('post', LikeSchema);
+const Like = mongoose.model('like', LikeSchema);
 
 exports.Like = Like;

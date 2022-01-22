@@ -1,4 +1,4 @@
-const { userRoute, authRoute } = require('./routes.index');
+const { userRoute, authRoute ,postRoute} = require('./routes.index');
 // const { authenticator } = require('../middlewares/middlewares.index');
 
 exports.assignRoutes = app => {
@@ -6,4 +6,5 @@ exports.assignRoutes = app => {
 
 	userRoute.assignRoutes(app);
 	authRoute.assignRoutes(app);
+	postRoute.assignRoutes(app);
 };
