@@ -1,8 +1,8 @@
 const { userRepository, followRepository } = require('../repository/repository.index');
 const { cryptUtil } = require('../utils/utils.index');
-const { stateEnums } = require('../model/enums/enums.index'); 
+const { stateEnums } = require('../model/enums/enums.index');
 
- 
+
 
 /**
  * @description Gets user by id
@@ -18,7 +18,7 @@ exports.getUser = async id => {
 	} catch (error) {
 		throw { success: false, error: any };
 	}
-}; 
+};
 
 
 /**
@@ -38,7 +38,7 @@ exports.updateUser = async user => {
 		throw { success: false, error: any };
 	}
 };
- 
+
 
 /**
  * @description Register User and send a verification mail
@@ -54,14 +54,7 @@ exports.registerUser = async user => {
 		if (existUser) return { success: false, error: 'This email is in use' };
 
 		user.verificationCode = cryptUtil.encode(user.email + Date.now());
-		const newUser = await userRepository.createUser(user);
-
-		const token = cryptUtil.createToken({
-			userId: newUser.id,
-			isLoggedIn: false
-		});
-
-	 
+		await userRepository.createUser(user);
 
 		return { success: true };
 	} catch (error) {
@@ -78,7 +71,7 @@ exports.registerUser = async user => {
  * @returns {Promise<{success: boolean, error: *} | {success: boolean}>}
  * {success: false, error: any} or {success: true}
  */
- exports.followUser = async followDto => {
+exports.followUser = async followDto => {
 	try {
 		await followRepository.followUser(followDto);
 
@@ -86,17 +79,17 @@ exports.registerUser = async user => {
 	} catch (error) {
 		throw { success: false, error: any };
 	}
- };
+};
 
- /**
- * @description Unfollow User
- * @param user {object} Object containing all required fields to
- * update user
- *
- * @returns {Promise<{success: boolean, error: *} | {success: boolean}>}
- * {success: false, error: any} or {success: true}
- */
-  exports.unFollowUser = async followDto => {
+/**
+* @description Unfollow User
+* @param user {object} Object containing all required fields to
+* update user
+*
+* @returns {Promise<{success: boolean, error: *} | {success: boolean}>}
+* {success: false, error: any} or {success: true}
+*/
+exports.unFollowUser = async followDto => {
 	try {
 		await followRepository.unFollowUser(followDto);
 
@@ -104,8 +97,8 @@ exports.registerUser = async user => {
 	} catch (error) {
 		throw { success: false, error: any };
 	}
-  };
- 
+};
+
 
 
 /**
@@ -114,7 +107,7 @@ exports.registerUser = async user => {
  * @returns {Promise<{success: boolean, error: *} | {success: boolean, data: follow}>}
  * {success: false, error: any} or {success: true, data: {follow}}
  */
- exports.getFollowAndFollowerUser = async id => {
+exports.getFollowAndFollowerUser = async id => {
 	try {
 		const followers = await followRepository.getFollowAndFollowerUser(id);
 

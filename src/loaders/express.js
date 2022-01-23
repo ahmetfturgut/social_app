@@ -28,21 +28,6 @@ app.get('/hello', (req, res, next) => {
 	next();
 });
 
-// const server = app.listen(3000, () => {
-// 	console.log('App running on port 3000');
-// });
 
-// exports.startServer = () => {
-// 	try {
-// 		app.listen(config.api_config.api_port);
-
-// 		console.log(
-// 			`%cAPI Running on: ${config.api_config.api_host}:${config.api_config.api_port}${config.api_config.api_base_url}`,
-// 			'color: green'
-// 		);
-// 	} catch (error) {
-// 		console.log('%cExpressJS: ' + error, 'color: red');
-// 	}
-// };
 
 module.exports = app;
