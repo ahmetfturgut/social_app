@@ -1,4 +1,8 @@
- 
-Project `src` structure directories.
+
+
+``` 
+npm install
+npm start
+```
 
 
